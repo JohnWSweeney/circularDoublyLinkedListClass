@@ -29,9 +29,10 @@ int main()
 	{
 		std::cout << "List is empty.\n";
 	}
-	/// test code here:
-	
-	///
+	/// test code here: ////////////////////////////////////////
+
+	std::cout << "result: " << result << "\n\n";
+	////////////////////////////////////////////////////////////
 	result = cdlist.size(list, nodeCount);
 	if (result == 0)
 	{
