@@ -24,7 +24,11 @@ dNode* cdList::init(int data)
 
 int cdList::addNodeFront(dNode** list, int data)
 {
-	if (*list == nullptr) return 1;
+	if (*list == nullptr) // list is empty.
+	{
+		*list = this->init(data);
+		return 0;
+	}
 
 	dNode* head = *list;
 	dNode* tail = head->prev;
@@ -38,24 +42,30 @@ int cdList::addNodeFront(dNode** list, int data)
 	return 0;
 }
 
-int cdList::addNodeBack(dNode* list, int data)
+int cdList::addNodeBack(dNode** list, int data)
 {
-	if (list == nullptr) return 1;
+	if (*list == nullptr) // list is empty.
+	{
+		*list = this->init(data);
+		return 0;
+	}
 
-	dNode* head = list;
+	dNode* head = *list;
 	do {
-		if (list->next == head)
+		dNode* curr = *list;
+		if (curr->next == head)
 		{
 			dNode* newNode = new dNode();
 			newNode->data = data;
+			curr->next = newNode;
+			newNode->prev = curr;
 			newNode->next = head;
-			newNode->prev = list;
-			list->next = newNode;
 			head->prev = newNode;
+			*list = head;
 			return 0;
 		}
-		list = list->next;
-	} while (list != head);
+		*list = curr->next;
+	} while (*list != head);
 }
 
 int cdList::addNodeByPos(dNode** list, int pos, int data)
