@@ -434,6 +434,20 @@ int cdList::returnDataByPos(dNode* list, int &data, int pos)
 	return -1;
 }
 
+int cdList::returnFrontData(dNode* list, int &data)
+{
+	if (list == nullptr) return 1; // list is empty.
+	data = list->data;
+	return 0;
+}
+
+int cdList::returnBackData(dNode* list, int &data)
+{
+	if (list == nullptr) return 1; // list is empty.
+	data = list->prev->data;
+	return 0;
+}
+
 int cdList::returnDataByPtr(dNode* list, int &data, dNode* ptr)
 {
 	if (list == nullptr) return 1;
