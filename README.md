@@ -1,6 +1,9 @@
 # Circular Doubly Linked List Class
 
 ## ChangeLog
+v1.0.4
+- Added bubbleSort function.
+
 v1.0.3
 - Updated function parameter lists.
 	- Swapped returnPtrByPos pos/ptr order.
