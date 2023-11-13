@@ -4,7 +4,7 @@
 
 int main()
 {
-	std::cout << "Circular Doubly Linked List Class v1.0.2\n\n";
+	std::cout << "Circular Doubly Linked List Class v1.0.3\n\n";
 	int result;
 	int nodeCount;
 	int data;
@@ -16,7 +16,7 @@ int main()
 
 	for (int i = -5; i < 5; i++)
 	{
-		cdlist.addNodeBack(&list, pow(i, 4));
+		cdlist.addBack(&list, pow(i, 4));
 	}
 	result = cdlist.size(list, nodeCount);
 	if (result == 0)

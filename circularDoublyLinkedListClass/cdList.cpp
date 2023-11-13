@@ -22,7 +22,7 @@ dNode* cdList::init(int data)
 	return newNode;
 }
 
-int cdList::addNodeFront(dNode** list, int data)
+int cdList::addFront(dNode** list, int data)
 {
 	if (*list == nullptr) // list is empty.
 	{
@@ -42,7 +42,7 @@ int cdList::addNodeFront(dNode** list, int data)
 	return 0;
 }
 
-int cdList::addNodeBack(dNode** list, int data)
+int cdList::addBack(dNode** list, int data)
 {
 	if (*list == nullptr) // list is empty.
 	{
@@ -68,7 +68,7 @@ int cdList::addNodeBack(dNode** list, int data)
 	} while (*list != head);
 }
 
-int cdList::addNodeByPos(dNode** list, int pos, int data)
+int cdList::addPos(dNode** list, int pos, int data)
 {
 	if (*list == nullptr) return 1; // list is empty.
 
@@ -114,7 +114,7 @@ int cdList::addNodeByPos(dNode** list, int pos, int data)
 	}
 }
 
-int cdList::deleteNodeFront(dNode** list)
+int cdList::deleteFront(dNode** list)
 {
 	if (*list == nullptr) return 1;
 
@@ -136,7 +136,7 @@ int cdList::deleteNodeFront(dNode** list)
 	}
 }
 
-int cdList::deleteNodeBack(dNode** list)
+int cdList::deleteBack(dNode** list)
 {
 	if (*list == nullptr) return 1;
 
@@ -162,7 +162,7 @@ int cdList::deleteNodeBack(dNode** list)
 	} while (*list != head);
 }
 
-int cdList::deleteNodeByPos(dNode** list, int pos)
+int cdList::deletePos(dNode** list, int pos)
 {
 	if (*list == nullptr) return 1;
 
@@ -200,7 +200,7 @@ int cdList::deleteNodeByPos(dNode** list, int pos)
 	return -1;
 }
 
-int cdList::deleteNodeByPtr(dNode** list, dNode* ptr)
+int cdList::deletePtr(dNode** list, dNode* ptr)
 {
 	if (*list == nullptr) return 1;
 	if (ptr == nullptr) return 2;
@@ -389,7 +389,7 @@ int cdList::deleteAfterPtr(dNode** list, dNode* ptr)
 	return -1;
 }
 
-int cdList::returnPtrByPos(dNode* list, int pos, dNode* &ptr)
+int cdList::returnPosPtr(dNode* list, dNode* &ptr, int pos)
 {
 	if (list == nullptr) return 1;
 
@@ -407,7 +407,7 @@ int cdList::returnPtrByPos(dNode* list, int pos, dNode* &ptr)
 	return -1;
 }
 
-int cdList::returnPosByPtr(dNode* list, int &pos, dNode* ptr)
+int cdList::returnPtrPos(dNode* list, int &pos, dNode* ptr)
 {
 	if (list == nullptr) return 1;
 	if (ptr == nullptr) return 2;
@@ -418,24 +418,6 @@ int cdList::returnPosByPtr(dNode* list, int &pos, dNode* ptr)
 		if (list == ptr)
 		{
 			pos = tempPos;
-			return 0;
-		}
-		++tempPos;
-		list = list->next;
-	} while (list != head);
-	return -1;
-}
-
-int cdList::returnDataByPos(dNode* list, int &data, int pos)
-{
-	if (list == nullptr) return 1;
-
-	dNode* head = list;
-	int tempPos = 0;
-	do {
-		if (tempPos == pos)
-		{
-			data = list->data;
 			return 0;
 		}
 		++tempPos;
@@ -458,7 +440,25 @@ int cdList::returnBackData(dNode* list, int &data)
 	return 0;
 }
 
-int cdList::returnDataByPtr(dNode* list, int &data, dNode* ptr)
+int cdList::returnPosData(dNode* list, int &data, int pos)
+{
+	if (list == nullptr) return 1;
+
+	dNode* head = list;
+	int tempPos = 0;
+	do {
+		if (tempPos == pos)
+		{
+			data = list->data;
+			return 0;
+		}
+		++tempPos;
+		list = list->next;
+	} while (list != head);
+	return -1;
+}
+
+int cdList::returnPtrData(dNode* list, int &data, dNode* ptr)
 {
 	if (list == nullptr) return 1;
 	if (ptr == nullptr) return 2;
@@ -475,7 +475,7 @@ int cdList::returnDataByPtr(dNode* list, int &data, dNode* ptr)
 	return -1;
 }
 
-int cdList::updateDataByPos(dNode* list, int data, int pos)
+int cdList::updatePosData(dNode* list, int pos, int data)
 {
 	if (list == nullptr) return 1;
 
@@ -493,7 +493,7 @@ int cdList::updateDataByPos(dNode* list, int data, int pos)
 	return -1;
 }
 
-int cdList::updateDataByPtr(dNode* list, int data, dNode* ptr)
+int cdList::updatePtrData(dNode* list, dNode* ptr, int data)
 {
 	if (list == nullptr) return 1;
 	if (ptr == nullptr) return 2;
@@ -510,7 +510,7 @@ int cdList::updateDataByPtr(dNode* list, int data, dNode* ptr)
 	return -1;
 }
 
-int cdList::findDataReturnPos(dNode* list, int data, int &pos)
+int cdList::returnDataPos(dNode* list, int data, int &pos)
 {
 	if (list == nullptr) return 1;
 
@@ -528,7 +528,7 @@ int cdList::findDataReturnPos(dNode* list, int data, int &pos)
 	return -1;
 }
 
-int cdList::findDataReturnPtr(dNode* list, int data, dNode* &ptr)
+int cdList::returnDataPtr(dNode* list, int data, dNode* &ptr)
 {
 	if (list == nullptr) return 1;
 
@@ -544,7 +544,7 @@ int cdList::findDataReturnPtr(dNode* list, int data, dNode* &ptr)
 	return -1;
 }
 
-int cdList::findMinReturnPos(dNode* list, int &min, int &pos)
+int cdList::returnMinPos(dNode* list, int &min, int &pos)
 {
 	if (list == nullptr) return 1;
 
@@ -567,7 +567,7 @@ int cdList::findMinReturnPos(dNode* list, int &min, int &pos)
 	return 0;
 }
 
-int cdList::findMinReturnPtr(dNode* list, int &min, dNode* &ptr)
+int cdList::returnMinPtr(dNode* list, int &min, dNode* &ptr)
 {
 	if (list == nullptr) return 1;
 
@@ -587,7 +587,7 @@ int cdList::findMinReturnPtr(dNode* list, int &min, dNode* &ptr)
 	return 0;
 }
 
-int cdList::findMaxReturnPos(dNode* list, int &max, int &pos)
+int cdList::returnMaxPos(dNode* list, int &max, int &pos)
 {
 	if (list == nullptr) return 1;
 
@@ -610,7 +610,7 @@ int cdList::findMaxReturnPos(dNode* list, int &max, int &pos)
 	return 0;
 }
 
-int cdList::findMaxReturnPtr(dNode* list, int &max, dNode* &ptr)
+int cdList::returnMaxPtr(dNode* list, int &max, dNode* &ptr)
 {
 	if (list == nullptr) return 1;
 
@@ -630,7 +630,7 @@ int cdList::findMaxReturnPtr(dNode* list, int &max, dNode* &ptr)
 	return 0;
 }
 
-int cdList::findTailReturnPos(dNode* list, int &pos)
+int cdList::returnTailPos(dNode* list, int &pos)
 {
 	if (list == nullptr) return 1;
 	dNode* head = list;
@@ -646,7 +646,7 @@ int cdList::findTailReturnPos(dNode* list, int &pos)
 	} while (list != head);
 }
 
-int cdList::findTailReturnPtr(dNode* list, dNode* &ptr)
+int cdList::returnTailPtr(dNode* list, dNode* &ptr)
 {
 	if (list == nullptr) return 1;
 	dNode* tail = list->prev;
@@ -654,7 +654,7 @@ int cdList::findTailReturnPtr(dNode* list, dNode* &ptr)
 	return 0;
 }
 
-int cdList::movePosToFront(dNode** list, int pos)
+int cdList::movePosFront(dNode** list, int pos)
 {
 	if (*list == nullptr) return 1; // list empty.
 	if (pos == 0) return -2; // no action needed.
@@ -696,7 +696,7 @@ int cdList::movePosToFront(dNode** list, int pos)
 	return -1;
 }
 
-int cdList::movePtrToFront(dNode** list, dNode* ptr)
+int cdList::movePtrFront(dNode** list, dNode* ptr)
 {
 	if (*list == nullptr) return 1;
 	if (ptr == nullptr) return 2;
@@ -732,7 +732,7 @@ int cdList::movePtrToFront(dNode** list, dNode* ptr)
 	return -1;
 }
 
-int cdList::movePosToBack(dNode** list, int pos)
+int cdList::movePosBack(dNode** list, int pos)
 {
 	if (*list == nullptr) return 1;
 
@@ -774,7 +774,7 @@ int cdList::movePosToBack(dNode** list, int pos)
 	return -1;
 }
 
-int cdList::movePtrToBack(dNode** list, dNode* ptr)
+int cdList::movePtrBack(dNode** list, dNode* ptr)
 {
 	if (*list == nullptr) return 1;
 	if (ptr == nullptr) return 2;
@@ -1184,8 +1184,8 @@ int cdList::shuffle(dNode** list)
 
 		dNode* ptr1 = nullptr;
 		dNode* ptr2 = nullptr;
-		returnPtrByPos(*list, position1, ptr1);
-		returnPtrByPos(*list, position2, ptr2);
+		returnPosPtr(*list, ptr1, position1);
+		returnPosPtr(*list, ptr2, position2);
 		swap(list, ptr1, ptr2);
 		++temp;
 	} while (temp < pow(nodeCount, 2));
